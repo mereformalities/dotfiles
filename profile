@@ -68,6 +68,7 @@ alias psql="$postgres/psql"
 alias cb="cd $OLDPWD"
 alias back=cb
 alias ..="cd .."
+alias ...="../.."
 alias home="cd ~"
 alias dev="cd ~/dev"
 alias desktop="cd ~/Desktop"
@@ -115,6 +116,10 @@ alias topmem="top vsize"
 alias unlock="sudo chflags nouchg"
 alias relock="sudo chflags uchg" 
 alias flushdns="dscacheutil -flushcache"
+
+# Processes
+alias tu='top -o cpu' # cpu
+alias tm='top -o vsize' # memory
 
 # Config
 alias rebash="source ~/.profile"

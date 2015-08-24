@@ -1,11 +1,11 @@
 [user]
-	name = Brant Watrous
-	email = watroubd@gmail.com
+	name = YOUR_NAME
+	email = YOUR_EMAIL
 [diff]
-	external = /Users/brant/dev/etc/dotfiles/bin/git-diff-cmd
+	external = ~/dev/etc/dotfiles/bin/git-diff-cmd
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 [core]
-	excludesfile = /Users/brant/.gitignore_global
+	excludesfile = ~/.gitignore

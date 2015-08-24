@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#RSS_THRESHOLD=204800 # 200 MB
+RSS_THRESHOLD=102400  # 100 MB
+#RSS_THRESHOLD=75000  #  75 MB
+#RSS_THRESHOLD=50000  #  50 MB
+
+# Kill the most expensive Chrome processes
+ps ux | \
+    grep '[C]hrome Helper --type=renderer' | \
+    grep -v extension-process | \
+		awk -v thresh="$RSS_THRESHOLD" 'NR > 0 { rss=$6 }; {if (rss > thresh) print}' | \
+    #sort -nk +4 | tail
+    tr -s ' ' | \
+    cut -d ' ' -f2 | \
+    xargs kill

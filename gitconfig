@@ -1,7 +1,11 @@
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
 [user]
 	name = Brant Watrous
 	email = watroubd@gmail.com
+[diff]
+	external = /Users/brant/dev/etc/dotfiles/bin/git-diff-cmd
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[core]
+	excludesfile = /Users/brant/.gitignore_global

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" != "" ]; then
+	echo "$1/.git" # FINISH
+	echo "$1/node_modules"
+fi
+
+# TODO: Archive $1

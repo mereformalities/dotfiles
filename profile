@@ -11,6 +11,8 @@ export VISUAL
 # alias e='vim'
 
 mac=/usr/local/bin:/usr/local/sbin
+etc=$HOME/dev/etc/dotfiles/bin
+dev=$HOME/dev/bin
 git=/usr/local/git
 postgres=/Applications/Postgres.app/Contents/Versions/9.4/bin
 mysql=/usr/local/mysql/bin
@@ -21,7 +23,7 @@ mamp=/Applications/MAMP/bin/php/php5.4.10
 buildtools=23.0.0
 
 # Set path
-export PATH=$mac:$git:$mamp:$mysql:$postgres:$andtools:$andptools:$PATH
+export PATH=$mac:$etc:$dev:$git:$mamp:$postgres:$mysql:$andtools:$andptools:$PATH
 export MANPATH=/usr/local/man:$MANPATH
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -133,7 +135,6 @@ alias npml="npm -g list"
 # alias subl="/Applications/Sublime\ Text 2.app/Contents/SharedSupport/bin/subl"
 
 # Versioning
-alias resetdiff="sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
 alias gitmm="git merge origin/master --no-commit"
 alias uncommit="git reset --soft HEAD~1"
 alias rmcommit="git reset --hard HEAD~1"
@@ -158,6 +159,10 @@ alias gcm="git commit -m"
 alias gcam="git commit -a -m"
 alias svndr="svn merge --dry-run -r BASE:HEAD ."
 alias svnignore="svn propedit svn:ignore"
+
+# Xcode
+alias resetdiff="sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/"
+alias crashes="open ~/Library/Logs/DiagnosticReports/"
 
 # Android
 alias aapt="$andsdk/build-tools/$buildtools/aapt"
@@ -184,6 +189,27 @@ function histfind {
 	history | grep -i "$1"
 }
 
+# Run shell script
+function run {
+    ~/dev/bin/$1.sh
+}
+
+# Run apple script
+function script {
+    osascript ~/dev/bin/$1.scpt
+}
+
+# Ruby version and gemset
+function rubyenv {
+	local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
+	local   build=$(echo $MY_RUBY_HOME | awk -F'-' '{print $3}')
+	[ "$version" != "" ] && version="ruby-$version-$build"
+	local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
+	[ "$gemset" != "" ] && gemset="@$gemset"
+	local full="$version$gemset"
+	[ "$full" != "" ] && echo "$full "
+}
+
 # Init a cocoapods project
 function podinit {
 	# First rubyinit
@@ -196,6 +222,19 @@ function podinit {
 	if [ ! -f "Podfile" ]; then
 		echo -e 'source "https://github.com/CocoaPods/Specs.git"' > Podfile
 		pod install
+	fi
+}
+
+# Open the directory's xcworkspace
+function work {
+	target="."
+	if [ "$1" != "" ]; then
+		target=$1
+		cd $target
+	fi
+	workspace=`find $target -maxdepth 1 -name "*.xcworkspace" | head -1`
+	if [ "$workspace" != "" ]; then
+		open $workspace
 	fi
 }
 

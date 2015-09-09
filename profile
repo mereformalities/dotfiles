@@ -196,12 +196,16 @@ function histfind {
 
 # Run shell script
 function run {
-    ~/dev/bin/$1.sh
+	if [ "$1" != "" ]; then
+    	~/dev/bin/$1.sh
+	fi
 }
 
 # Run apple script
 function script {
-    osascript ~/dev/bin/$1.scpt
+	if [ "$1" != "" ]; then
+    	osascript ~/dev/script/$1.scpt
+	fi
 }
 
 # Ruby version and gemset

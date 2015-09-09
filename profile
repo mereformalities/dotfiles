@@ -125,6 +125,7 @@ alias tm='top -o vsize' # memory
 alias rebash="source ~/.profile"
 alias edprof="e ~/.profile"
 alias edhosts="e ~/private/etc/hosts"
+alias remind="mate ~/dev/history"
                         
 # Rails
 alias debug="tail -f -44 log/development.log"
@@ -137,7 +138,7 @@ alias npmg="npm -g"
 alias npml="npm -g list"
 
 # Sublime
-# alias subl="/Applications/Sublime\ Text 2.app/Contents/SharedSupport/bin/subl"
+# alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Versioning
 alias gitmm="git merge origin/master --no-commit"
@@ -162,6 +163,7 @@ alias ghist="git log -n 5"
 alias glog="git log"
 alias gcm="git commit -m"
 alias gcam="git commit -a -m"
+alias gremote="git config --list | grep remote.origin.url"
 alias svndr="svn merge --dry-run -r BASE:HEAD ."
 alias svnignore="svn propedit svn:ignore"
 
@@ -205,6 +207,13 @@ function run {
 function script {
 	if [ "$1" != "" ]; then
     	osascript ~/dev/script/$1.scpt
+	fi
+}
+
+# Open project notes
+function record {
+	if [ "$1" != "" ]; then
+		mate ~/dev/history/$1.md
 	fi
 }
 
